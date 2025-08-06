@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: pdf-to-flipbook-converter
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python3 web_interface.py"
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    healthCheckPath: /health
