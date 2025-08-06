@@ -586,9 +586,16 @@ def health():
     return {'status': 'healthy', 'message': 'PDF to Flipbook Converter is running'}
 
 if __name__ == '__main__':
+    import os
+    
+    # Get port from environment variable (for deployment) or default to 8080
+    port = int(os.environ.get('PORT', 8080))
+    debug = os.environ.get('FLASK_ENV') != 'production'
+    
     print("🚀 Starting PDF to Flipbook Converter Web Interface")
-    print("📱 Open your browser and go to: http://localhost:8080")
+    if debug:
+        print(f"📱 Open your browser and go to: http://localhost:{port}")
     print("📄 Upload a PDF file and get a beautiful HTML5 flipbook!")
     print("\nPress Ctrl+C to stop the server")
     
-    app.run(debug=True, host='0.0.0.0', port=8080)
+    app.run(debug=debug, host='0.0.0.0', port=port)
